@@ -26,7 +26,7 @@ function NewPost({ onCancel, onAddPost }) {
   }
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form className={classes.form} onsubmit={submitHandler}>
       <p>
         <label htmlFor="body">Text</label>
         <textarea id="body" required rows={3} onChange={bodyChangeHandler} />
