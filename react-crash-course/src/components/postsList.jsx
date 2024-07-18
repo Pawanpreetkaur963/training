@@ -8,6 +8,10 @@ import classes from './postslist.module.css';
 
 
 function PostsList({ isPosting, onStopPosting }) {
+  const [posts, setPosts ] =  useState([]);
+  function addPostHandler(postData) {
+    setPosts([postData, ...posts]);
+  }
   return (
     <>
       {isPosting && (
