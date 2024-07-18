@@ -9,8 +9,9 @@ import classes from './postslist.module.css';
 
 function PostsList({ isPosting, onStopPosting }) {
   const [posts, setPosts ] =  useState([]);
+
   function addPostHandler(postData) {
-    setPosts([postData, ...posts]);
+    setPosts((existingPosts) => [postData, ...existingposts]);
   }
   return (
     <>
