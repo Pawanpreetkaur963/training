@@ -1,16 +1,13 @@
 
-const fs = require('node:fs/promises');
+import classes from './post.module.css';
 
-async function getStoredPosts() {
-  const rawFileContent = await fs.readFile('posts.json', { encoding: 'utf-8' });
-  const data = JSON.parse(rawFileContent);
-  const storedPosts = data.posts ?? [];
-  return storedPosts;
+function Post({ author, body }) {
+  return (
+    <li className={classes.post}>
+      <p className={classes.author}>{author}</p>
+      <p className={classes.text}>{body}</p>
+    </li>
+  );
 }
 
-function storePosts(posts) {
-  return fs.writeFile('posts.json', JSON.stringify({ posts: posts || [] }));
-}
-
-exports.getStoredPosts = getStoredPosts;
-exports.storePosts = storePosts;
+export default Post;
