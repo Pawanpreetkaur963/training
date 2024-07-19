@@ -1,45 +1,15 @@
+import classes from './newpost.module.css';
 
-import { useState } from 'react';
-
-import classes from './newPost.module.css';
-
-function NewPost({ onCancel, onAddPost }) {
-  const [enteredBody, setEnteredBody] = useState('');
-  const [enteredAuthor, setEnteredAuthor] = useState('');
-
-  function bodyChangeHandler(event) {
-    setEnteredBody(event.target.value);
-  }
-
-  function authorChangeHandler(event) {
-    setEnteredAuthor(event.target.value);
-  }
-
-  function submitHandler(event) {
-    event.preventDefault();
-    const postData = {
-      body: enteredBody,
-      author: enteredAuthor
-    };
-    onAddPost(postData);
-    onCancel();
-  }
-
+function NewPost() {
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form className={classes.form}>
       <p>
         <label htmlFor="body">Text</label>
-        <textarea id="body" required rows={3} onChange={bodyChangeHandler} />
+        <textarea id="body" required rows={3} />
       </p>
       <p>
         <label htmlFor="name">Your name</label>
-        <input type="text" id="name" required onChange={authorChangeHandler} />
-      </p>
-      <p className={classes.actions}>
-        <button type="button" onClick={onCancel}>
-          Cancel
-        </button>
-        <button>Submit</button>
+        <input type="text" id="name" required />
       </p>
     </form>
   );
