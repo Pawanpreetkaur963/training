@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 
-import classes from './newPost.module.css';
+import classes from './newpost.module.css';
 
 function NewPost({ onCancel, onAddPost }) {
   const [enteredBody, setEnteredBody] = useState('');

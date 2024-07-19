@@ -1,10 +1,10 @@
 
 import { useState } from 'react';
 
-import Post from './Post';
-import NewPost from './NewPost';
-import Modal from './Modal';
-import classes from './PostsList.module.css';
+import Post from './post';
+import NewPost from './newpost';
+import Modal from './modal';
+import classes from './postslist.module.css';
 
 function PostsList({ isPosting, onStopPosting }) {
   const [posts, setPosts] = useState([]);
