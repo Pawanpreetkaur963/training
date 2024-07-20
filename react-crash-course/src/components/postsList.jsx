@@ -7,7 +7,7 @@ import Modal from './modal';
 import classes from './postslist.module.css';
 
  function PostsList({ isPosting, onStopPosting }) {
-   //fetch('https://localhost:8080/podts').then(response => response.json()).then(data => { setPosts(data.posts)});
+
   const [posts, setPosts] = useState([]);
   useEffect( () => {
    async function fetchPosts() {
