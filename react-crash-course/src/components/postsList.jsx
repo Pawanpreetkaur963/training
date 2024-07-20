@@ -13,12 +13,10 @@ import classes from './postslist.module.css';
    async function fetchPosts() {
     const response = await fetch('http://localhost:8080/posts')
     const resData =await response.json();
-    .then((response) => response.json())
-    .then((data) => {
       setPosts(data.posts);
-    });
 
    }
+   fetchPosts();
   }, []);
 
  function addPostHandler(postData) {
