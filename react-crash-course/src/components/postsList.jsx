@@ -10,18 +10,18 @@ function PostsList({ isPosting, onStopPosting }) {
 
   useEffect(() => {
     async function fetchPosts() {
-      setFetching(true); // Set fetching to true before starting
+      setFetching(true);
       try {
         const response = await fetch('http://localhost:8080/posts');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const resData = await response.json();
-        setPosts(resData.posts); // Correctly use resData
+        setPosts(resData.posts);
       } catch (error) {
         console.error('Fetch error:', error);
       } finally {
-        setFetching(false); // Set fetching to false after completion
+        setFetching(false);
       }
     }
     fetchPosts();
