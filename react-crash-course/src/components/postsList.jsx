@@ -20,7 +20,7 @@ import classes from './postslist.module.css';
   }, []);
 
  function addPostHandler(postData) {
-   fetch('https://localhost:8080/podts',{
+   fetch('http://localhost:8080/posts',{
       method:'Post',
       body: JSON.stringify(postData),
       header: {
