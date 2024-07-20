@@ -6,11 +6,23 @@ import NewPost from './newpost';
 import Modal from './modal';
 import classes from './postslist.module.css';
 
-function PostsList({ isPosting, onStopPosting }) {
+ function PostsList({ isPosting, onStopPosting }) {
+   //fetch('https://localhost:8080/podts').then(response => response.json()).then(data => { setPosts(data.posts)});
   const [posts, setPosts] = useState([]);
+  useEffect( () => {
+   async function fetchPosts() {
+    const response = await fetch('http://localhost:8080/posts')
+    const resData =await response.json();
+    .then((response) => response.json())
+    .then((data) => {
+      setPosts(data.posts);
+    });
 
-  function addPostHandler(postData) {
-    fetch('https://localhost:8080/podts',{
+   }
+  }, []);
+
+ function addPostHandler(postData) {
+   fetch('https://localhost:8080/podts',{
       method:'Post',
       body: JSON.stringify(postData),
       header: {
