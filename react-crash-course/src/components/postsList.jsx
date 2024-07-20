@@ -6,18 +6,22 @@ import classes from './postslist.module.css';
 
 function PostsList({ isPosting, onStopPosting }) {
   const [posts, setPosts] = useState([]);
+  const [isFetching, setFetching] = useState(false);
 
   useEffect(() => {
     async function fetchPosts() {
+      setFetching(true); // Set fetching to true before starting
       try {
         const response = await fetch('http://localhost:8080/posts');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const resData = await response.json();
-        setPosts(resData.posts);
+        setPosts(resData.posts); // Correctly use resData
       } catch (error) {
         console.error('Fetch error:', error);
+      } finally {
+        setFetching(false); // Set fetching to false after completion
       }
     }
     fetchPosts();
@@ -32,7 +36,7 @@ function PostsList({ isPosting, onStopPosting }) {
       }
     }).catch(error => console.error('Post error:', error));
 
-    setPosts((existingPosts) => [postData, ...existingPosts]);
+    setPosts(existingPosts => [postData, ...existingPosts]);
   }
 
   return (
@@ -42,16 +46,22 @@ function PostsList({ isPosting, onStopPosting }) {
           <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
         </Modal>
       )}
-      {posts.length > 0 ? (
+      {!isFetching && posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
-            <Post key={post.id} author={post.author} body={post.body} />
+            <Post key={post.id} author={post.author} body={post.body} /> // Ensure key is unique
           ))}
         </ul>
-      ) : (
+      )}
+      {!isFetching && posts.length === 0 && (
         <div style={{ textAlign: 'center', color: 'white' }}>
           <h2>There are no posts yet.</h2>
           <p>Start adding some!</p>
+        </div>
+      )}
+      {isFetching && (
+        <div style={{ textAlign: 'center', color: 'white' }}>
+          <p>Loading posts...</p>
         </div>
       )}
     </>
