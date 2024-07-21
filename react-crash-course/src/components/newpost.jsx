@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import classes from './newpost.module.css';
 
 function NewPost({ onCancel, onAddPost }) {
