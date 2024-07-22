@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostsList from './components/postsList';
-import MainHeader from './components/mainheader';
+
 
 function post() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
