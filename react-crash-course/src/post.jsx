@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PostsList from './components/postsList';
 import MainHeader from './components/mainheader';
 
-function App() {
+function post() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   function showModalHandler() {
@@ -27,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default post;
