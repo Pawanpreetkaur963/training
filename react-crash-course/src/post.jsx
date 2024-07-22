@@ -6,9 +6,7 @@ import PostsList from './components/postsList';
 function post() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  function showModalHandler() {
-    setModalIsVisible(true);
-  }
+
 
   function hideModalHandler() {
     setModalIsVisible(false);
