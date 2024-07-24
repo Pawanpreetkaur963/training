@@ -1,4 +1,3 @@
-
 import classes from './post.module.css';
 
 function Post({ author, body }) {

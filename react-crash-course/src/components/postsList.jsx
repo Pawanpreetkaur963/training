@@ -1,29 +1,21 @@
 import { useState, useEffect } from 'react';
+
 import Post from './post';
-import NewPost from './newpost';
-import Modal from './modal';
 import classes from './postslist.module.css';
 
-function PostsList({ isPosting, onStopPosting }) {
+function PostsList() {
   const [posts, setPosts] = useState([]);
-  const [isFetching, setFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     async function fetchPosts() {
-      setFetching(true);
-      try {
-        const response = await fetch('http://localhost:8080/posts');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const resData = await response.json();
-        setPosts(resData.posts);
-      } catch (error) {
-        console.error('Fetch error:', error);
-      } finally {
-        setFetching(false);
-      }
+      setIsFetching(true);
+      const response = await fetch('http://localhost:8080/posts');
+      const resData = await response.json();
+      setPosts(resData.posts);
+      setIsFetching(false);
     }
+
     fetchPosts();
   }, []);
 
@@ -32,24 +24,18 @@ function PostsList({ isPosting, onStopPosting }) {
       method: 'POST',
       body: JSON.stringify(postData),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    }).catch(error => console.error('Post error:', error));
-
-    setPosts(existingPosts => [postData, ...existingPosts]);
+        'Content-Type': 'application/json',
+      },
+    });
+    setPosts((existingPosts) => [postData, ...existingPosts]);
   }
 
   return (
     <>
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
-        </Modal>
-      )}
       {!isFetching && posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
-            <Post key={post.id} author={post.author} body={post.body} /> // Ensure key is unique
+            <Post key={post.body} author={post.author} body={post.body} />
           ))}
         </ul>
       )}
